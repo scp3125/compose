@@ -1,13 +1,21 @@
 version: "3"
 
+volumes:
+  data:
+
+networks:
+  bridge:
+
 services:
   server:
     image: portainer/portainer-ce:latest
     container_name: portainer
-    restart: unless-stopped
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./portainer_data:/data
+      - data:/data
+    networks:
+      - bridge
     ports:
       - "9000:9000"
       # - "9443:9443"

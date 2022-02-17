@@ -1,5 +1,10 @@
 version: "3"
 
+volumes:
+  data:
+networks:
+  bridge:
+
 services:
   syncthing:
     image: syncthing/syncthing:latest
@@ -9,7 +14,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ./data:/var/syncthing
+      - data:/var/syncthing
+    networks:
+      - bridge
     ports:
       - 8384:8384
       - 22000:22000/tcp
