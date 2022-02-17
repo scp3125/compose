@@ -1,0 +1,25 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  app:
+    image: drone/drone:2.5.0
+    container_name: drone
+    restart: always
+    environment:
+      - DRONE_GITEA_SERVER=http://127.0.0.1:3000
+      - DRONE_GITEA_CLIENT_ID=xxx
+      - DRONE_GITEA_CLIENT_SECRET=xxx
+      - DRONE_RPC_SECRET=xxx
+      - DRONE_SERVER_HOST=127.0.0.1:5001
+      - DRONE_SERVER_PROTO=http
+      - DRONE_USER_CREATE=username:xxx,admin:true
+    volumes:
+      - ./data:/data
+    networks:
+      - center
+    ports:
+      - "5001:80"

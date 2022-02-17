@@ -1,0 +1,23 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  server:
+    image: gitea/gitea:1.15.6
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - center
+    ports:
+    #   - "5002:3000"
+    - "222:22"

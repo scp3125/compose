@@ -1,0 +1,17 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  app:
+    image: chronograf:1.8.8
+    container_name: chronograf
+    restart: unless-stopped
+    volumes:
+      - ./data:/var/lib/chronograf
+    networks:
+      - center
+    ports:
+      - "8888:8888"

@@ -1,0 +1,58 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  nsqd-m1:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqd-m1
+    restart: unless-stopped
+    networks:
+      - center
+    volumes:
+      - ./data-m1:/data
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    command: /nsqd -data-path=/data --lookupd-tcp-address=nsqlookupd-s1:4160 --lookupd-tcp-address=nsqlookupd-s2:4160 --lookupd-tcp-address=nsqlookupd-s3:4160
+
+  nsqd-m2:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqd-m2
+    restart: unless-stopped
+    networks:
+      - center
+    volumes:
+      - ./data-m2:/data
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    command: /nsqd -data-path=/data --lookupd-tcp-address=nsqlookupd-s1:4160 --lookupd-tcp-address=nsqlookupd-s2:4160 --lookupd-tcp-address=nsqlookupd-s3:4160
+
+  nsqd-u1:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqd-u1
+    restart: unless-stopped
+    networks:
+      - center
+    volumes:
+      - ./data-u1:/data
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    command: /nsqd -data-path=/data --lookupd-tcp-address=nsqlookupd-s1:4160 --lookupd-tcp-address=nsqlookupd-s2:4160 --lookupd-tcp-address=nsqlookupd-s3:4160
+
+  nsqd-u2:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqd-u2
+    restart: unless-stopped
+    volumes:
+      - ./data-u2:/data
+    networks:
+      - center
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    command: /nsqd -data-path=/data --lookupd-tcp-address=nsqlookupd-s1:4160 --lookupd-tcp-address=nsqlookupd-s2:4160 --lookupd-tcp-address=nsqlookupd-s3:4160

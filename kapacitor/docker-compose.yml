@@ -1,0 +1,16 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  app:
+    image: kapacitor:1.5.9
+    container_name: kapacitor
+    restart: unless-stopped
+    volumes:
+      - ./kapacitor:/var/lib/kapacitor
+      - ./kapacitor.conf:/etc/kapacitor/kapacitor.conf:ro
+    networks:
+      - center

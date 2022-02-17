@@ -1,0 +1,21 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  server:
+    image: caddy:2.4.6
+    container_name: caddy
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./site:/srv
+      - ./caddy_data:/data
+      - ./caddy_config:/config
+    networks:
+        - center
+    ports:
+      - "80:80"
+      - "443:443"

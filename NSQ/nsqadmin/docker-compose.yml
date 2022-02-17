@@ -1,0 +1,16 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  nsqadmin:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqadmin
+    restart: unless-stopped
+    networks:
+      - center
+    ports:
+      - "4171:4171"
+    command: /nsqadmin --lookupd-http-address=nsqlookupd-s1:4161 --lookupd-http-address=nsqlookupd-s2:4161 --lookupd-http-address=nsqlookupd-s3:4161

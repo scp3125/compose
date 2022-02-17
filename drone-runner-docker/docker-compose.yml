@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  app:
+    image: drone/drone-runner-docker:1.8.0
+    container_name: drone-runner
+    restart: always
+    environment:
+      - DRONE_SERVER_PROTO=http
+      - DRONE_RPC_HOST=127.0.0.1:5001
+      - DRONE_RPC_SECRET=xxx
+      - DRONE_SERVER_HOST=127.0.0.1:5001
+      - DRONE_RUNNER_CAPACITY=10
+      - DRONE_RUNNER_NAME=runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - center
+    ports:
+      - "7001:3000"

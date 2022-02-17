@@ -1,0 +1,22 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+    app:
+      image: mysql:8.0.26
+      container_name: mysql
+      restart: unless-stopped
+      environment:
+        - MYSQL_ROOT_PASSWORD=123
+      # docker安全验证
+      security_opt:
+        - seccomp:unconfined
+      volumes:
+        - ./data:/var/lib/mysql
+      networks:
+        - center
+      ports:
+        - "3306:3306"

@@ -1,0 +1,19 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  server:
+    image: adguard/adguardhome:v0.106.3
+    container_name: adguardhome
+    restart: unless-stopped
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+    networks:
+        - center
+    ports:
+      - "80:80"
+      - "443:443"

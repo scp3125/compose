@@ -1,0 +1,39 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  nsqlookupd-s1:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqlookupd-s1
+    restart: unless-stopped
+    networks:
+      - center
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+    command: /nsqlookupd
+
+  nsqlookupd-s2:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqlookupd-s2
+    restart: unless-stopped
+    networks:
+      - center
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+    command: /nsqlookupd
+
+  nsqlookupd-s3:
+    image: nsqio/nsq:v1.2.0
+    container_name: nsqlookupd-s3
+    restart: unless-stopped
+    networks:
+      - center
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+    command: /nsqlookupd

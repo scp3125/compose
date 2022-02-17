@@ -1,0 +1,15 @@
+version: "3"
+
+networks:
+  center:
+    external: true
+
+services:
+  app:
+    image: grafana/grafana:8.0.3
+    container_name: grafana
+    restart: unless-stopped
+    networks:
+      - center
+    ports:
+      - "3000:3000"
