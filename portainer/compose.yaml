@@ -7,7 +7,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
     networks:
-      - bridge
+      - center
     ports:
       - "9000:9000"
       # - "9443:9443"
@@ -17,4 +17,5 @@ volumes:
     name: "portainer-data"
 
 networks:
-  bridge:
+  center:
+    name: center
