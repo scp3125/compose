@@ -6,6 +6,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=Asia/Shanghai
     volumes:
       - syncthing-data:/var/syncthing
     networks:
