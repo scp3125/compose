@@ -1,0 +1,13 @@
+services:
+  portainer:
+    image: hoppscotch/hoppscotch:latest
+    container_name: hoppscotch
+    restart: unless-stopped
+    networks:
+      - center
+    ports:
+      - "3001:3000"
+
+networks:
+  center:
+    name: center
