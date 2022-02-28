@@ -1,0 +1,21 @@
+services:
+  portainer:
+    image: star7th/showdoc:latest
+    container_name: showdoc
+    restart: unless-stopped
+    user: root
+    privileged: true
+    volumes:
+      - showdoc-data:/var/www/html/
+    networks:
+      - center
+    ports:
+      - "4999:80"
+
+volumes:
+  showdoc-data:
+    name: "showdoc-data"
+
+networks:
+  center:
+    name: center
